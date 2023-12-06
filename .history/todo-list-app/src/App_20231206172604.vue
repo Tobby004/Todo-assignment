@@ -6,7 +6,7 @@
       <button @click="addTodo" class="add-button">Add</button>
     </div>
     <ul>
-      <li v-for="(todo, index) in todo" :key="index" class="todo-item">
+      <li v-for="(todo, index) in todos" :key="index" class="todo-item">
         <span>{{ todo }}</span>
         <button @click="editTodo(index)" class="edit-button">Edit</button>
         <button @click="deleteTodo(index)" class="delete-button">Delete</button>
@@ -21,7 +21,7 @@
 export default {
   data() {
     return {
-      todo: [],
+      todos: [],
       newTodo: '',
       editedTodoIndex: null,
     };
@@ -30,21 +30,21 @@ export default {
     addTodo() {
       if (this.newTodo.trim() !== '') {
         if (this.editedTodoIndex !== null) {
-          this.todo[this.editedTodoIndex] = this.newTodo;
+          this.todos[this.editedTodoIndex] = this.newTodo;
           this.newTodo = '';
           this.editedTodoIndex = null;
         } else {
-          this.todo.push(this.newTodo);
+          this.todos.push(this.newTodo);
           this.newTodo = '';
         }
       }
     },
     editTodo(index) {
-      this.newTodo = this.todo[index];
+      this.newTodo = this.todos[index];
       this.editedTodoIndex = index;
     },
     deleteTodo(index) {
-      this.todo.splice(index, 1);
+      this.todos.splice(index, 1);
     },
   },
 };
@@ -67,7 +67,6 @@ h1 {
   padding: 20px;
   background-color: #333;
   border-radius: 8px;
-  margin-top: 100px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -79,6 +78,7 @@ h1 {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 100px;
 }
 
 .input-field {
